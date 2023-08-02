@@ -1,11 +1,18 @@
-// Buton elementini yakalayalım
-// eslint-disable-next-line no-undef
-const myButton = document.getElementById("myButton");
+/* eslint-disable no-inner-declarations */
+/* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
 
-/* eslint-disable */
-function onButtonClick() {
-    console.log("Button clicked!");
-}
+Office.onReady(function (info) {
+    // Office.js tam olarak yüklendiğinde buradaki kod çalışacak.
+    if (info.host === Office.HostType.Outlook) {
+      // Butonu seçin ve tıklama işlemini Office.onReady() içinde tanımlayın
+      const myButton = document.getElementById("myButton");
 
-// Butona tıklama olayını dinleyelim ve onButtonClick fonksiyonunu çağıralım
-myButton.addEventListener("click", onButtonClick);
+      function onButtonClick() {
+        console.log("Button clicked CRM!");
+      }
+
+      // Butona tıklama işlemi event ekleme
+      myButton.addEventListener("click", onButtonClick);
+    }
+  });
