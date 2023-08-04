@@ -1,12 +1,27 @@
 /* eslint-disable no-inner-declarations */
 /* eslint-disable no-undef */
 /* eslint-disable prettier/prettier */
-
 Office.onReady(function (info) {
     // Office.js tam olarak yüklendiğinde buradaki kod çalışacak.
     if (info.host === Office.HostType.Outlook) {
       // Butonu seçin ve tıklama işlemini Office.onReady() içinde tanımlayın
       const loginButton = document.getElementById("loginBtn");
+
+      if (isPersistenceSupported()) {
+        Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, setUserNameInfo);
+      }
+            
+      function isPersistenceSupported() {        
+        return Office.context.mailbox.addHandlerAsync !== undefined;
+      }
+
+      function setUserNameInfo(eventArgs) {
+        const item = Office.context.mailbox.item;
+        if(item){
+          var emailAddress = item.from.emailAddress;
+          document.getElementById('username').value = emailAddress;
+        }        
+      }      
 
       function onButtonClick() {
         console.log("Button clicked CRM!");
@@ -45,10 +60,7 @@ Office.onReady(function (info) {
         const requestUrl ='https://localhost:3001/login?authorization=QXBwbGU6QXBwbGU=';  //'http://democrm.logo.com.tr/LogoCRMRest/api/v1.0/login?authorization=QXBwbGU6QXBwbGU=';
         //Office.context.ui.displayDialogAsync('taskpane.html', { height: 50, width: 50 });
 
-        //window.open("taskpane.html", '_blank');
-
-
-  
+        //window.open("taskpane.html", '_blank');  
 
         $.ajax({
             url: requestUrl,
@@ -71,19 +83,6 @@ Office.onReady(function (info) {
           });
  
     }
-
- 
-
-
-
-
-
-
-
-
-
-
-
 
     }
   });
