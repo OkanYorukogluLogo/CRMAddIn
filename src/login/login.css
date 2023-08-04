@@ -184,3 +184,81 @@ form .button input:hover{
 form .signup-link a:hover{
   text-decoration: underline;
 }
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 80%; /* Modal genişliği */
+  max-width: 600px; /* Maksimum genişlik belirleme */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  position: relative; /* Pozisyonu göreceli olarak ayarlayın */
+}
+/* Modal içeriği */
+.modal-content {
+  background-color: #f4f4f4; /* İstediğiniz arka plan rengini ayarlayın */
+  margin: 10% auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 80%; /* Modal genişliği */
+  max-width: 600px; /* Maksimum genişlik belirleme */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  position: relative; /* Pozisyonu göreceli olarak ayarlayın */
+  margin-bottom: 20px; 
+}
+
+/* Servis URL açıklaması */
+.modal-content label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 15px; /* Servis URL etiketine üstten boşluk ekleyin */
+  margin-bottom: 2px; /* Servis URL etiketine alttan boşluk ekleyin */
+}
+
+/* Kapatma işareti (close) */
+.close {
+  position: absolute; /* Mutlaka pozisyonu mutlak olarak ayarlayın */
+  top: 10px; /* İstediğiniz yükseklik */
+  right: 10px; /* İstediğiniz genişlik */
+  font-size: 20px;
+  cursor: pointer;
+}
+/* Text kutusu genişletme */
+.modal-content input[type="text"] {
+  width: 100%; /* Yatayda tam genişlik */
+  margin-bottom: 5px;
+}
+
+/* Kaydet butonunu aşağıya çekme */
+.save-settings-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* "Ayarlar" başlığı */
+.modal-content h2 {
+  margin-top: 0; /* Varsayılan üst boşluğu kaldırır */
+}
+
+/* Version Bilgisi */
+.version-info {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+}
