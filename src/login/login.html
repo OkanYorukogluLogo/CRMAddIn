@@ -80,6 +80,25 @@
               <!--<i class="entypo-login"></i>-->
               Giriş
             </button>
+            </div>
+            <button id="settingsBtn" class="btn btn-primary btn-block">
+              Bağlantı İşlemleri
+            </button>
+            
+            <div id="settingsModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">Ayarlar</h2>
+                <label for="serviceUrlInput">Servis URL:</label>
+                <input type="text" id="serviceUrlInput" placeholder="URL" />
+                <button id="saveSettingsBtn" class="btn btn-primary">Kaydet</button>
+                
+                <!-- Version Bilgisi -->
+                <div class="version-info">
+                  Version Bilgisi: <span id="versionValue">1.0.0</span>
+                </div>
+              </div>
+            </div>
           </div>
 
         <div class="login-bottom-links">

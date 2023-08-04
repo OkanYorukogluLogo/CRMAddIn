@@ -7,6 +7,43 @@ Office.onReady(function (info) {
       // Butonu seçin ve tıklama işlemini Office.onReady() içinde tanımlayın
       const loginButton = document.getElementById("loginBtn");
 
+
+        // Ayarlar butonuna tıklama olayı ekleme
+        const settingsBtn = document.getElementById("settingsBtn");
+        settingsBtn.addEventListener("click", function() {
+          const modal = document.getElementById("settingsModal");
+          modal.style.display = "block";
+        });
+
+        // Modal kapatma butonuna tıklama olayı ekleme
+        const closeModalBtn = document.querySelector(".close");
+        closeModalBtn.addEventListener("click", function() {
+          const modal = document.getElementById("settingsModal");
+          modal.style.display = "none";
+        });
+
+        // Kaydet butonuna tıklama olayı ekleme
+        const saveSettingsBtn = document.getElementById("saveSettingsBtn");
+        saveSettingsBtn.addEventListener("click", function() {
+          const serviceUrlInput = document.getElementById("serviceUrlInput");
+          const serviceUrl = serviceUrlInput.value;
+
+          // Ayarları localStorage'e kaydetme
+          localStorage.setItem("serviceUrl", serviceUrl);
+
+          // Modalı kapatma
+          const modal = document.getElementById("settingsModal");
+          modal.style.display = "none";
+        });
+
+        // Ayarları silme işlevi
+        function clearSettings() {
+          // localStorage'de "serviceUrl" adında saklanan değeri sil
+          localStorage.removeItem("serviceUrl");
+          
+          // Eğer başka ayarları da saklıyorsanız, onları da aynı şekilde silebilirsiniz
+        }
+
       if (isPersistenceSupported()) {
         Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, setUserNameInfo);
       }
