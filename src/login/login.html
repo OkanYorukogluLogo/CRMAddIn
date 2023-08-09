@@ -14,7 +14,7 @@
 
 	<link rel="icon" href="../helpers/assets/images/favicon.ico">
 
-	<title>Neon | Login</title>
+	<title>CRM</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
 	<link rel="stylesheet" href="../helpers/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 
@@ -53,7 +53,30 @@
       <div></div>
     </div>
     
-    <div class="login-form">      
+    <div class="login-form"> 
+      <div id="settingsModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2 class="modal-title">Ayarlar</h2>
+          <label for="serviceUrlInput">Servis URL:</label>
+          <input type="text" id="serviceUrlInput" placeholder="URL" />
+          <button id="saveSettingsBtn" class="btn btn-primary">Kaydet</button>
+          
+          <!-- Version Bilgisi -->
+          <div class="version-info">
+            Version Bilgisi: <span id="versionValue">1.0.0</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="infoModal" class="modal">
+        <div class="modal-content">
+          <span class="infoClose">&times;</span>                
+          <div class="version-info">
+            <span id="infoValue"></span>
+          </div>
+        </div>
+      </div>     
       <div class="login-content">        
         <div class="form-login-error">
           <h3>Invalid login</h3>
@@ -64,7 +87,7 @@
               <div class="input-group-addon">
                <!--<i class="entypo-user"></i>-->
               </div>              
-              <input id="username" type="text" class="form-control" name="username" id="username" placeholder="Kullanıcı Adı" autocomplete="off" />
+              <input id="username" type="text" class="form-control" name="username" id="username" placeholder="Kullanıcı Adı" autocomplete="off" required/>
             </div>            
           </div>          
           <div class="form-group">            
@@ -72,7 +95,7 @@
               <div class="input-group-addon">
                <!-- <i class="entypo-key"></i>-->
               </div>              
-              <input id="password" type="password" class="form-control" name="password" id="password" placeholder="Parola" autocomplete="off" />
+              <input id="password" type="password" class="form-control" name="password" id="password" placeholder="Parola" autocomplete="off" required/>
             </div>          
           </div>          
           <div class="form-group">
@@ -83,28 +106,14 @@
             </div>
             <button id="settingsBtn" class="btn btn-primary btn-block">
               Bağlantı İşlemleri
-            </button>
-            
-            <div id="settingsModal" class="modal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2 class="modal-title">Ayarlar</h2>
-                <label for="serviceUrlInput">Servis URL:</label>
-                <input type="text" id="serviceUrlInput" placeholder="URL" />
-                <button id="saveSettingsBtn" class="btn btn-primary">Kaydet</button>
-                
-                <!-- Version Bilgisi -->
-                <div class="version-info">
-                  Version Bilgisi: <span id="versionValue">1.0.0</span>
-                </div>
-              </div>
-            </div>
+            </button>            
+
           </div>
 
         <div class="login-bottom-links">
-          <a href="#" class="link">Parolamı Unuttum?</a>
+         <!-- <a href="" class="link">Parolamı Unuttum?</a>-->
           <br />          
-          <a href="#">Logo</a> <a href="https://www.logo.com.tr/">Yazılım</a>          
+          <a href="https://www.logo.com.tr/">Logo Yazılım</a>        
         </div>
         
       </div>      
