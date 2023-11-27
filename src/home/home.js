@@ -34,13 +34,15 @@ Office.onReady(function (info) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       function setUserNameInfo(eventArgs) {
         const item = Office.context.mailbox.item;
+        debugger;
+        const item2 = Office.context.mailbox.userProfile;
         if(item){
           var emailAddress = item.from.emailAddress;
    
           var linkElement = document.getElementById("userMail");
-  
+          debugger;
           // Öğenin içeriğini değiştir
-          linkElement.innerHTML = '<img src="../helpers/assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />' + emailAddress;        
+          linkElement.innerHTML = '<img src="https://www.logo.com.tr/_next/image?url=%2Flogo.webp&w=1920&q=75" style="border-radius: 10%;" alt="" class="img-circle" width="44" />' + emailAddress;        
   
         }        
       }  
