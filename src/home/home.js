@@ -16,7 +16,12 @@ Office.onReady(function (info) {
         window.location.href = "login.html";
       }
       function onButtonClick2() {   
-        window.open("http://democrm.logo.com.tr/LOGOCRM/default.aspx#ViewID=userStartScreen", '_blank');  
+        var iframeContainer = document.getElementById("iframeContainer");
+        var iframe = document.createElement('iframe');
+        iframe.src = 'http://localhost:8282/v1_0/NAF.LFlow.Web/Pages/PortalPages/Dashboard.aspx'; // İframe'in içeriği (src) burada belirlenebilir
+        iframe.style.width = 'auto';
+        iframe.style.height = '500px';
+        iframeContainer.appendChild(iframe);        
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       function myFirma() {
@@ -33,14 +38,12 @@ Office.onReady(function (info) {
   
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       function setUserNameInfo(eventArgs) {
-        const item = Office.context.mailbox.item;
-        debugger;
-        const item2 = Office.context.mailbox.userProfile;
+        const item = Office.context.mailbox.item;    
         if(item){
+          debugger;
           var emailAddress = item.from.emailAddress;
    
-          var linkElement = document.getElementById("userMail");
-          debugger;
+          var linkElement = document.getElementById("userMail");          
           // Öğenin içeriğini değiştir
           linkElement.innerHTML = '<img src="https://www.logo.com.tr/_next/image?url=%2Flogo.webp&w=1920&q=75" style="border-radius: 10%;" alt="" class="img-circle" width="44" />' + emailAddress;        
   
