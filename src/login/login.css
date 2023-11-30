@@ -194,9 +194,11 @@ form .signup-link a:hover{
   max-width: 600px; /* Maksimum genişlik belirleme */
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  position: relative; /* Pozisyonu göreceli olarak ayarlayın */
+  position: absolute; /* Pozisyonu göreceli olarak ayarlayın */
 }
-
+.modal {
+  position: absolute !important;
+}
 /* Servis URL açıklaması */
 .modal-content label {
   display: block;
@@ -214,7 +216,13 @@ form .signup-link a:hover{
   font-size: 20px;
   cursor: pointer;
 }
-
+.infoClose {
+  position: absolute; /* Mutlaka pozisyonu mutlak olarak ayarlayın */
+  top: 10px; /* İstediğiniz yükseklik */
+  right: 10px; /* İstediğiniz genişlik */
+  font-size: 20px;
+  cursor: pointer;
+}
 /* Text kutusu genişletme */
 .modal-content input[type="text"] {
   width: 100%; /* Yatayda tam genişlik */

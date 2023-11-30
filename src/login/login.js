@@ -5,6 +5,13 @@ Office.onReady(function (info) {
     // Office.js tam olarak yüklendiğinde buradaki kod çalışacak.
     if (info.host === Office.HostType.Outlook) {
       // Butonu seçin ve tıklama işlemini Office.onReady() içinde tanımlayın
+
+      const sessionID = localStorage.getItem("sessionId");
+      if(sessionID)
+      {        
+        window.location.href = "home.html";
+      }
+
       const loginButton = document.getElementById("loginBtn");
 
 
@@ -20,8 +27,16 @@ Office.onReady(function (info) {
         closeModalBtn.addEventListener("click", function() {
           const modal = document.getElementById("settingsModal");
           modal.style.display = "none";
-        });
+        }); 
 
+
+          // Info Modal kapatma butonuna tıklama olayı ekleme
+          const closeInfoModalBtn = document.querySelector(".infoClose");
+          closeInfoModalBtn.addEventListener("click", function() {
+            const infomodal = document.getElementById("infoModal");
+            infomodal.style.display = "none";
+          }); 
+          
         // Kaydet butonuna tıklama olayı ekleme
         const saveSettingsBtn = document.getElementById("saveSettingsBtn");
         saveSettingsBtn.addEventListener("click", function() {
@@ -37,13 +52,14 @@ Office.onReady(function (info) {
         });
 
         // Ayarları silme işlevi
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         function clearSettings() {
           // localStorage'de "serviceUrl" adında saklanan değeri sil
           localStorage.removeItem("serviceUrl");
           
           // Eğer başka ayarları da saklıyorsanız, onları da aynı şekilde silebilirsiniz
         }
-
+/*
       if (isPersistenceSupported()) {
         Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, setUserNameInfo);
       }
@@ -52,6 +68,7 @@ Office.onReady(function (info) {
         return Office.context.mailbox.addHandlerAsync !== undefined;
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       function setUserNameInfo(eventArgs) {
         const item = Office.context.mailbox.item;
         if(item){
@@ -59,10 +76,8 @@ Office.onReady(function (info) {
           document.getElementById('username').value = emailAddress;
         }        
       }      
-
-      function onButtonClick() {
-        console.log("Button clicked CRM!");
-
+*/
+      function onButtonClick() {       
         const username = document.getElementById('username').value;
 
         getUserGists(username, function(gists, error) {
@@ -94,7 +109,24 @@ Office.onReady(function (info) {
       function getUserGists(user, callback) {
         // eslint-disable-next-line no-debugger
         debugger;
-        const requestUrl ='https://localhost:3001/login?authorization=QXBwbGU6QXBwbGU=';  //'http://democrm.logo.com.tr/LogoCRMRest/api/v1.0/login?authorization=QXBwbGU6QXBwbGU=';
+
+        //const username = document.getElementById('username').value;
+        //const password = document.getElementById('password').value;
+        //const base64Credentials = (username +":" + password).toString('base64');//Buffer.from(`${username}:${password}`).toString('base64');
+
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const credentials = `${username}:${password}`;
+        const base64Credentials = btoa(credentials);
+
+
+        // Hedef URL'yi her istek için belirleyin
+        //const targetURL = 'http://democrm.logo.com.tr/LogoCRMRest/api/v1.0/login?authorization=' + base64Credentials;
+
+
+
+        const requestUrl ='https://localhost:3001/login?authorization=' + base64Credentials; //QXBwbGU6QXBwbGU=';  //'http://democrm.logo.com.tr/LogoCRMRest/api/v1.0/login?authorization=QXBwbGU6QXBwbGU=';
         //Office.context.ui.displayDialogAsync('taskpane.html', { height: 50, width: 50 });
 
         //window.open("taskpane.html", '_blank');  
@@ -108,15 +140,20 @@ Office.onReady(function (info) {
             agent: false
         }).done(function(response) {
             // Ajax isteği başarılı oldu, burada yönlendirmeyi yapabilirsiniz.
-            if (response) {
-              $("#username").val(response.SessionId);   
+            if (response && response.Message =="") {
+              //$("#username").val(response.SessionId);   
+              localStorage.setItem("sessionId", response.SessionId);
+              window.location.href = "home.html";
             } else {
-              // İstek başarılı olsa bile, sunucudan gelen cevaba göre başka bir işlem yapabilirsiniz.
-              // Örneğin, hata mesajını kullanıcıya gösterebilirsiniz.
+              const infomodal = document.getElementById("infoModal");
+              infomodal.style.display = "block"; 
+              document.getElementById('infoValue').innerHTML = response.Message;//"Giriş başarısız oldu; sunucuda bir hata oluştu.";  
             }
           }).fail(function(error) {
             // İstek başarısız oldu, hata mesajını kullanıcıya gösterebilirsiniz.
-            console.log('İstek başarısız:', error);           
+            const infomodal = document.getElementById("infoModal");
+            infomodal.style.display = "block";  
+            document.getElementById('infoValue').innerHTML = "Giriş başarısız oldu; sunucuda bir hata oluştu. " + error.statusText;          
           });
  
     }
